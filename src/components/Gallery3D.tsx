@@ -50,7 +50,7 @@ function PaintingFrame({ artwork, position, rotation, onSelect }: PaintingFrameP
       
       {/* Miniatura de la obra usando Drei Image */}
       <ThreeImage
-        url={artwork.image}
+        url={encodeURI(artwork.image)}
         scale={[1.45, 1.05]}
         position={[0, 0, 0.045]}
         transparent

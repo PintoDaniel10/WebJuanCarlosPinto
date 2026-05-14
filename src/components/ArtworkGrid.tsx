@@ -19,7 +19,7 @@ export default function ArtworkGrid({ artworks }: ArtworkGridProps) {
         >
           <div className="aspect-[4/5] overflow-hidden">
             <img
-              src={artwork.image}
+              src={encodeURI(artwork.image)}
               alt={artwork.title}
               className="gallery-image w-full h-full object-cover"
               loading="lazy"
