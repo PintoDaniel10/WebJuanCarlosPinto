@@ -1,0 +1,123 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Inicio' },
+  { href: '/vida', label: 'Vida' },
+  { href: '/obras', label: 'Obras' },
+  { href: '/poesias', label: 'Poesías' },
+  { href: '/contacto', label: 'Contacto' },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#E8E6E3] transition-all duration-300" id="main-nav">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="font-display text-xl tracking-wide font-semibold text-[#98624B] hover:text-[#98624B]/80 transition-colors">
+      Juan Carlos Pinto
+    </a>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden lg:flex gap-8 text-sm tracking-wide">
+      {links.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'nav-link text-gray-600 hover:text-[#98624B] transition-colors',
+              currentPath === link.href && 'text-[#98624B]'
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <button 
+      id="menu-toggle" 
+      class="lg:hidden p-2 text-[#98624B] hover:text-[#98624B]/80 transition-colors"
+      aria-label="Abrir menú"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu - Slide from Left -->
+<div id="mobile-menu" class="fixed inset-y-0 left-0 w-72 max-w-[80%] bg-[#98624B] z-50 transform -translate-x-full transition-transform duration-300 ease-out shadow-2xl lg:hidden">
+  <div class="flex flex-col h-full">
+    <!-- Header del menú -->
+    <div class="flex justify-between items-center p-6 border-b border-white/20">
+      <span class="text-white font-display text-lg font-semibold">Menú</span>
+      <button id="menu-close" class="p-2 text-white/80 hover:text-white transition-colors" aria-label="Cerrar menú">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Links -->
+    <nav class="flex-1 py-8">
+      {links.map((link, index) => (
+        <a
+          href={link.href}
+          class="block px-6 py-4 text-white/90 font-body font-medium text-lg hover:bg-white/10 hover:text-white transition-colors border-b border-white/10"
+          style={`animation-delay: ${index * 50}ms`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Footer del menú -->
+    <div class="p-6 border-t border-white/20">
+      <p class="text-white/60 text-sm text-center">Juan Carlos Pinto</p>
+      <p class="text-white/40 text-xs text-center mt-1">El Arte en sus Manos</p>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay oscuro cuando el menú está abierto -->
+<div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"></div>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOverlay = document.getElementById('menu-overlay');
+
+  function openMenu() {
+    mobileMenu?.classList.remove('-translate-x-full');
+    menuOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.add('-translate-x-full');
+    menuOverlay?.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle?.addEventListener('click', openMenu);
+  menuClose?.addEventListener('click', closeMenu);
+  menuOverlay?.addEventListener('click', closeMenu);
+
+  // Close menu on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // Nav background on scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav?.classList.add('bg-white/95', 'shadow-sm');
+    } else {
+      nav?.classList.remove('shadow-sm');
+    }
+  });
+</script>

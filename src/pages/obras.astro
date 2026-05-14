@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import Gallery3D from '../components/Gallery3D';
+import ArtworkGrid from '../components/ArtworkGrid';
+import { artworks } from '../data/artworks';
+---
+
+<Layout title="Obras">
+  <Navigation />
+
+  <main class="pt-24 pb-12">
+    <section class="max-w-6xl mx-auto px-6 py-16">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display text-[#2D2A26] mb-4">Sus Obras</h1>
+        <p class="text-lg text-[#6B6560]">Galería de pinturas y dibujos</p>
+      </div>
+
+      <!-- Toggle buttons -->
+      <div class="mb-10 flex justify-center gap-4">
+        <button
+          id="btn-gallery-3d"
+          class="px-6 py-2.5 bg-[#A67B5B] text-white font-body font-medium rounded-lg hover:bg-[#8B6914] transition-all duration-300 shadow-md hover:shadow-lg"
+        >
+          Vista 3D
+        </button>
+        <button
+          id="btn-gallery-grid"
+          class="px-6 py-2.5 border-2 border-[#A67B5B] text-[#A67B5B] font-body font-medium rounded-lg hover:bg-[#A67B5B] hover:text-white transition-all duration-300"
+        >
+          Vista Grid
+        </button>
+      </div>
+
+      <!-- Gallery 3D -->
+      <div id="gallery-container">
+        <Gallery3D client:load artworks={artworks} />
+      </div>
+
+      <!-- Grid View -->
+      <div id="grid-container" class="hidden">
+        <ArtworkGrid client:visible artworks={artworks} />
+      </div>
+    </section>
+  </main>
+
+  <ScrollToTop />
+  <Footer />
+</Layout>
+
+<script>
+  const btn3D = document.getElementById('btn-gallery-3d');
+  const btnGrid = document.getElementById('btn-gallery-grid');
+  const galleryContainer = document.getElementById('gallery-container');
+  const gridContainer = document.getElementById('grid-container');
+
+  btn3D?.addEventListener('click', () => {
+    galleryContainer?.classList.remove('hidden');
+    gridContainer?.classList.add('hidden');
+    btn3D?.classList.add('bg-[#A67B5B]', 'text-white', 'shadow-md');
+    btn3D?.classList.remove('border-[#A67B5B]', 'text-[#A67B5B]');
+    btnGrid?.classList.remove('bg-[#A67B5B]', 'text-white', 'shadow-md');
+    btnGrid?.classList.add('border-2', 'border-[#A67B5B]', 'text-[#A67B5B]');
+  });
+
+  btnGrid?.addEventListener('click', () => {
+    galleryContainer?.classList.add('hidden');
+    gridContainer?.classList.remove('hidden');
+    btnGrid?.classList.add('bg-[#A67B5B]', 'text-white', 'shadow-md');
+    btnGrid?.classList.remove('border-[#A67B5B]', 'text-[#A67B5B]');
+    btn3D?.classList.remove('bg-[#A67B5B]', 'text-white', 'shadow-md');
+    btn3D?.classList.add('border-2', 'border-[#A67B5B]', 'text-[#A67B5B]');
+  });
+</script>

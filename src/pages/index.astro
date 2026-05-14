@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import { quotes } from '../data/biography';
+---
+
+<Layout title="Inicio">
+  <Navigation />
+
+  <main class="pt-24 pb-12">
+    <section class="max-w-4xl mx-auto px-6 py-16">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-display font-semibold text-[#98624B] mb-4">Juan Carlos Pinto</h1>
+        <p class="text-xl text-[#80804F] font-display italic">El Arte en sus Manos</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="flex justify-center">
+          <div class="relative">
+            <img
+              src="/images/generales/autoretrato.gif"
+              alt="Autorretrato de Juan Carlos Pinto - 1993"
+              class="w-64 h-auto rounded-lg shadow-xl"
+            />
+            <p class="text-center text-sm text-gray-500 mt-2">Autorretrato, 1993</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <blockquote class="border-l-4 border-[#80804F] pl-4 italic text-gray-700">
+            "{quotes[0]}"
+          </blockquote>
+
+          <p class="text-gray-600 leading-relaxed">
+            Explora la obra de este talentoso artista argentino, cuyo legado artístico abarca décadas de creatividad y dedicación. A través de sus pinturas, dibujos y poemas, descubrirás un mundo de expresión artística única.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-4">
+            <a href="/obras" class="px-6 py-3 bg-[#98624B] text-white rounded-lg hover:bg-[#98624B]/90 transition-colors">
+              Ver Obras
+            </a>
+            <a href="/vida" class="px-6 py-3 border-2 border-[#98624B] text-[#98624B] rounded-lg hover:bg-[#98624B] hover:text-white transition-colors">
+              Conocer su Vida
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#f8f6f0] py-16 mt-12">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="text-2xl font-display text-[#98624B] mb-8">Citas del Artista</h2>
+        <div class="space-y-6">
+          {quotes.map((quote) => (
+            <blockquote class="text-gray-700 italic text-lg">
+              "{quote}"
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <ScrollToTop />
+  <Footer />
+</Layout>

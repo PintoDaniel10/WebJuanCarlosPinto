@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import { biography } from '../data/biography';
+---
+
+<Layout title="Su Vida">
+  <Navigation />
+
+  <main class="pt-24 pb-12">
+    <section class="max-w-4xl mx-auto px-6 py-16">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-display text-[#2D2A26] mb-4">Su Vida</h1>
+        <p class="text-xl text-[#6B6560]">La trayectoria de un artista autodidacta</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Línea vertical -->
+        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#A67B5B] to-[#E8E6E3]"></div>
+
+        <div class="space-y-16">
+          {biography.map((event, index) => (
+            <div 
+              class:list={[
+                "relative flex items-center",
+                index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+              ]}
+            >
+              <!-- Punto en la línea -->
+              <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-white border-3 border-[#A67B5B] transform -translate-x-1/2 hover:scale-125 transition-transform cursor-pointer z-10"></div>
+
+              <!-- Contenido -->
+              <div class:list={[
+                "ml-12 md:ml-0 md:w-1/2 p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300",
+                index % 2 === 0 ? "md:mr-8" : "md:ml-8"
+              ]}>
+                {event.image && (
+                  <div class="mb-4 overflow-hidden rounded-lg">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                )}
+                <span class="inline-block px-3 py-1 bg-[#A67B5B] text-white text-xs font-mono rounded-full mb-3">
+                  {event.year}
+                </span>
+                <h3 class="text-xl font-display text-[#2D2A26] mb-2">{event.title}</h3>
+                <p class="text-[#6B6560] text-sm leading-relaxed">{event.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Legado -->
+    <section class="bg-[#F5F3EF] py-16 mt-12">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="text-2xl font-display text-[#2D2A26] mb-4">Legado Artístico</h2>
+        <p class="text-[#6B6560] leading-relaxed">
+          Juan Carlos Pinto dejó un legado que trasciende sus obras. Como docente fundó la Escuela Superior de Artes de la Universidad Nacional de Córdoba, influyendo en generaciones de artistas. Su filosofía autodidacta y su dedicación al arte siguen inspirando.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <ScrollToTop />
+  <Footer />
+</Layout>
