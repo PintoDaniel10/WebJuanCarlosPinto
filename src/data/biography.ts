@@ -62,7 +62,7 @@ export const biography: TimelineEvent[] = [
 ];
 
 export const quotes = [
-  "El dibujo es para mí como una aventura fascinante y ésta me suele sorprenderme",
+  "El dibujo es para mí como una aventura fascinante y ésta suele sorprenderme",
   "Trato de expresarme con el máximo de economía de medios y lo más espontáneamente que puedo",
   "Pintar me fascina porque puedo enfatizar con el color las intenciones del dibujo"
 ];
