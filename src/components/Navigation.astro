@@ -1,19 +1,21 @@
 ---
 const currentPath = Astro.url.pathname;
 
+const BASE_PATH = '/WebJuanCarlosPinto';
+
 const links = [
-  { href: '/', label: 'Inicio' },
-  { href: '/vida', label: 'Vida' },
-  { href: '/obras', label: 'Obras' },
-  { href: '/poesias', label: 'Poesías' },
-  { href: '/contacto', label: 'Contacto' },
+  { href: BASE_PATH + '/', label: 'Inicio' },
+  { href: BASE_PATH + '/vida', label: 'Vida' },
+  { href: BASE_PATH + '/obras', label: 'Obras' },
+  { href: BASE_PATH + '/poesias', label: 'Poesías' },
+  { href: BASE_PATH + '/contacto', label: 'Contacto' },
 ];
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#E8E6E3] transition-all duration-300" id="main-nav">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     <!-- Logo -->
-    <a href="/" class="font-display text-xl tracking-wide font-semibold text-[#98624B] hover:text-[#98624B]/80 transition-colors">
+    <a href="/WebJuanCarlosPinto/" class="font-display text-xl tracking-wide font-semibold text-[#98624B] hover:text-[#98624B]/80 transition-colors">
       Juan Carlos Pinto
     </a>
 
