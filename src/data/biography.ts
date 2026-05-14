@@ -5,12 +5,14 @@ export interface TimelineEvent {
   image?: string;
 }
 
+export const BASE_PATH = '/WebJuanCarlosPinto';
+
 export const biography: TimelineEvent[] = [
   {
     year: '1906',
     title: 'Nacimiento',
     description: 'Nació el 18 de Septiembre en Santiago del Estero. Hijo de Carlos Pinto Gallo y Enriqueta Villar Palacio. Desde muy niño entabló una natural relación con las manifestaciones plástica realizando algunos perfiles en arcilla.',
-    image: '/images/biografia/p_suvida_01.jpg'
+    image: BASE_PATH + '/images/biografia/p_suvida_01.jpg'
   },
   {
     year: '1913-1916',
